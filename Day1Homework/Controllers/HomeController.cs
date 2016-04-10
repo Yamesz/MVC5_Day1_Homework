@@ -52,10 +52,10 @@ namespace Day1Homework.Controllers
         {
             return new List<MoneyRecordViewModels>
             {
-                new MoneyRecordViewModels { category="支出",money=100,date="2016-01-01".ToDateTime() },
-                new MoneyRecordViewModels { category="支出",money=200,date="2016-01-02".ToDateTime() },
-                new MoneyRecordViewModels { category="支出",money=300,date="2016-01-03".ToDateTime() },
-                new MoneyRecordViewModels { category="收入",money=400,date="2016-01-04".ToDateTime() },
+                new MoneyRecordViewModels { category="支出",money=100,date=new DateTime(2016,1,1) },
+                new MoneyRecordViewModels { category="支出",money=200,date=new DateTime(2016,1,2) },
+                new MoneyRecordViewModels { category="支出",money=300,date=new DateTime(2016,1,3) },
+                new MoneyRecordViewModels { category="收入",money=400,date=new DateTime(2016,1,4) },
             };
         }
 
