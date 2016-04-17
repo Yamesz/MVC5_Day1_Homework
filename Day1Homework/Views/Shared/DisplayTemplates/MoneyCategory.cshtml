@@ -1,0 +1,12 @@
+﻿@model MoneyCategory
+@{
+    switch (Model)
+    {
+        case MoneyCategory.pay:
+            @:支出
+            break;
+        case MoneyCategory.income:
+            @:收入
+            break;
+    }
+}

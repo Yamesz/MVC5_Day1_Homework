@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Day1Homework.Models;
+using Day1Homework.Models.ViewModels;
 
 namespace Day1Homework.Controllers
 {

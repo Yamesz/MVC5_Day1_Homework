@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Day1Homework.App_Start;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,7 @@ namespace Day1Homework
     {
         protected void Application_Start()
         {
+            AutoMapperConfig.Configure();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
