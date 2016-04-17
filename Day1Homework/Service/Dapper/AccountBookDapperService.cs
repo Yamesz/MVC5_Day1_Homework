@@ -25,7 +25,7 @@ namespace Day1Homework.Service.Dapper
                 var sqlStatement = @"
                         SELECT [t1].[Id], [t1].[Categoryyy], [t1].[Amounttt], [t1].[Dateee], [t1].[Remarkkk]
                         FROM (
-                            SELECT ROW_NUMBER() OVER (ORDER BY [t0].[Dateee] DESC) AS [ROW_NUMBER], [t0].[Id], [t0].[Categoryyy], [t0].[Amounttt], [t0].[Dateee], [t0].[Remarkkk]
+                            SELECT ROW_NUMBER() OVER (ORDER BY [t0].[Amounttt] DESC) AS [ROW_NUMBER], [t0].[Id], [t0].[Categoryyy], [t0].[Amounttt], [t0].[Dateee], [t0].[Remarkkk]
                             FROM [AccountBook] AS [t0]
                             ) AS [t1]
                         WHERE [t1].[ROW_NUMBER] BETWEEN @skip + 1 AND @skip + @Take

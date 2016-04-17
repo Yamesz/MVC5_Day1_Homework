@@ -5,6 +5,7 @@ using Day1Homework.Service;
 using Day1Homework.Service.Dapper;
 using Day1Homework.Service.Interface;
 using Day1Homework.Utility;
+using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +16,16 @@ namespace Day1Homework.Controllers
 {
     public class HomeController : Controller
     {
-        private IAccountBookService accountBookService;
+        [Dependency]
+        public IAccountBookService accountBookService { get; set; }
 
-        public HomeController()
-        {
-            //accountBookService = new AccountBookService();
-            accountBookService = new AccountBookDapperService();
-            
-        }
+        //public HomeController(IAccountBookService service)
+        //{
+        //    //accountBookService = new AccountBookService();
+        //    //accountBookService = new AccountBookDapperService();
+        //    this.accountBookService = service;
+
+        //}
         public ActionResult Index()
         {
             ViewBag.CategoryList = CategoryGet();
