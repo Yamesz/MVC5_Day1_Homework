@@ -13,7 +13,11 @@ namespace Day1Homework.Service
 
         public IEnumerable<AccountBook> GetPageData(int page, int pageSize)
         {
-            return db.AccountBook.Skip((page-1)* pageSize).Take(pageSize).ToList();
+            return db.AccountBook
+                    .OrderByDescending(x=>x.Dateee)
+                    .Skip((page-1)* pageSize)
+                    .Take(pageSize)
+                    .ToList();
         }
 
         public void Dispose()
