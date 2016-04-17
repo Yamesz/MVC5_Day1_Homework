@@ -24,11 +24,10 @@ namespace Day1Homework.Controllers
         //    //accountBookService = new AccountBookService();
         //    //accountBookService = new AccountBookDapperService();
         //    this.accountBookService = service;
-
         //}
+
         public ActionResult Index()
         {
-            ViewBag.CategoryList = CategoryGet();
             return View();
         }
 
@@ -57,15 +56,6 @@ namespace Day1Homework.Controllers
         }
 
         #region private 方法
-
-        private static IEnumerable<SelectListItem> CategoryGet()
-        {
-            var items = new List<SelectListItem>();
-            items.Add(new SelectListItem() { Text = "請選擇", Value = "", Selected = true });
-            items.Add(new SelectListItem() { Text = "支出", Value = "0", Selected = false });
-            items.Add(new SelectListItem() { Text = "收入", Value = "1", Selected = false });
-            return items;
-        }
         #endregion
     }
 }

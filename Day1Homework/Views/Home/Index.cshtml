@@ -8,8 +8,9 @@
         <div class="form-group">
             @Html.LabelFor(model => model.category, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-sm-10">
-                @Html.DropDownListFor(model => model.category, 
-                                        (IEnumerable<SelectListItem>)ViewBag.CategoryList, 
+                @Html.DropDownListFor(model => model.category,
+                                        EnumHelper.GetSelectList(typeof(MoneyCategory)),
+                                        "--請選擇--",
                                         new { @class = "form-control" }
                                      )
             </div>

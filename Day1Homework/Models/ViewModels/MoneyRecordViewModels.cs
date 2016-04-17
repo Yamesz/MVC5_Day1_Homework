@@ -1,27 +1,11 @@
-﻿using System;
+﻿using Day1Homework.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Day1Homework.Models.ViewModels
 {
-    /// <summary>
-    /// 記帳類型
-    /// </summary>
-    /// <remarks>
-    /// view顯示的文字由UIHint=>MoneyCategory 決定
-    /// </remarks>
-    public enum MoneyCategory
-    {
-        /// <summary>
-        /// 支出
-        /// </summary>
-        pay = 0,
-        /// <summary>
-        /// 收入
-        /// </summary>
-        income = 1
-    }
     public class MoneyRecordViewModels
     {
         [Display(Name = "AccountBookID")]
