@@ -16,15 +16,14 @@ namespace Day1Homework.Controllers
 {
     public class HomeController : Controller
     {
-        [Dependency]
         public IAccountBookService accountBookService { get; set; }
 
-        //public HomeController(IAccountBookService service)
-        //{
-        //    //accountBookService = new AccountBookService();
-        //    //accountBookService = new AccountBookDapperService();
-        //    this.accountBookService = service;
-        //}
+        public HomeController(IAccountBookService service)
+        {
+            //accountBookService = new AccountBookService();
+            //accountBookService = new AccountBookDapperService();
+            this.accountBookService = service;
+        }
 
         public ActionResult Index()
         {
