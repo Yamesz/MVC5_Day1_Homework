@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Day1Homework.Models.ViewModels
 {
-    public class MoneyRecordViewModels
+    public class MoneyRecordViewModel
     {
         [Display(Name = "AccountBookID")]
         public Guid accountBookID { get; set; }

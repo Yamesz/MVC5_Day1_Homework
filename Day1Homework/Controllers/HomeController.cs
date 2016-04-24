@@ -20,8 +20,6 @@ namespace Day1Homework.Controllers
 
         public HomeController(IAccountBookService service)
         {
-            //accountBookService = new AccountBookService();
-            //accountBookService = new AccountBookDapperService();
             this.accountBookService = service;
         }
 
@@ -30,12 +28,19 @@ namespace Day1Homework.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(MoneyRecordViewModel moneyRecordViewModel)
+        {
+            return View();
+        }
+
         [ChildActionOnly]
         public ActionResult MoneyRecordList()
         {
             var model = accountBookService.GetPageData(1, 5);
-            List<MoneyRecordViewModels> moneyRecordList =
-                Mapper.Map<List<MoneyRecordViewModels>>(model);
+            List<MoneyRecordViewModel> moneyRecordList =
+                Mapper.Map<List<MoneyRecordViewModel>>(model);
 
             return View(moneyRecordList);
         }

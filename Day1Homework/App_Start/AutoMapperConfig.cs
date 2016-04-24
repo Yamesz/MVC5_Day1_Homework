@@ -13,7 +13,7 @@ namespace Day1Homework.App_Start
         public static void Configure()
         {
             Mapper.Initialize(cfg => {
-                cfg.CreateMap<AccountBook, MoneyRecordViewModels>()
+                cfg.CreateMap<AccountBook, MoneyRecordViewModel>()
                 .ForMember(target => target.accountBookID, option => option.MapFrom(source => source.Id))
                 .ForMember(target => target.category, option => option.MapFrom(source => source.Categoryyy))
                 .ForMember(target => target.money, option => option.MapFrom(source => source.Amounttt))
