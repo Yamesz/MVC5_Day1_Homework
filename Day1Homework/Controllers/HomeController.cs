@@ -32,6 +32,11 @@ namespace Day1Homework.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index(MoneyRecordViewModel moneyRecordViewModel)
         {
+            DescriptionValidate(moneyRecordViewModel);
+            if (ModelState.IsValid)
+            {
+
+            }
             return View();
         }
 
@@ -60,6 +65,18 @@ namespace Day1Homework.Controllers
         }
 
         #region private 方法
+        private void DescriptionValidate(MoneyRecordViewModel moneyRecordViewModel)
+        {
+            var descriptionLength = moneyRecordViewModel.description == null
+                                    ? 0
+                                    : moneyRecordViewModel.description.Length;
+
+            if (descriptionLength > 100)
+            {
+                ModelState.AddModelError("description",
+                    string.Format("您輸入{0}字，不能超過100個字", moneyRecordViewModel.description.Length));
+            }
+        }
         #endregion
     }
 }
