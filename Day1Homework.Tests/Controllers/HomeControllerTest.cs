@@ -15,18 +15,22 @@ namespace Day1Homework.Tests.Controllers
     public class HomeControllerTest
     {
         private IAccountBookService accountBookService { get; set; }
+        private ILogService logService { get; set; }
 
         [TestInitialize]
         public void MyTestInitialize()
         {
             this.accountBookService = Substitute.For<IAccountBookService>();
+            this.logService = Substitute.For<ILogService>();
         }
 
         [TestMethod]
         public void Index()
         {
             // Arrange
-            HomeController controller = new HomeController(this.accountBookService);
+            HomeController controller = new HomeController(
+                this.accountBookService,
+                this.logService);
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -39,7 +43,9 @@ namespace Day1Homework.Tests.Controllers
         public void About()
         {
             // Arrange
-            HomeController controller = new HomeController(this.accountBookService);
+            HomeController controller = new HomeController(
+                this.accountBookService,
+                this.logService);
 
             // Act
             ViewResult result = controller.About() as ViewResult;
@@ -52,7 +58,9 @@ namespace Day1Homework.Tests.Controllers
         public void Contact()
         {
             // Arrange
-            HomeController controller = new HomeController(this.accountBookService);
+            HomeController controller = new HomeController(
+                this.accountBookService,
+                this.logService);
 
             // Act
             ViewResult result = controller.Contact() as ViewResult;

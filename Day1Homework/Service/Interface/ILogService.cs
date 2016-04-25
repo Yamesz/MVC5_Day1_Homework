@@ -6,13 +6,10 @@ using System.Web;
 
 namespace Day1Homework.Service.Interface
 {
-    public interface IAccountBookService: IDisposable
+    public interface ILogService : IDisposable
     {
-        IEnumerable<AccountBook> GetPageData(int page,int pageSize);
-
-        void Save(AccountBook accountBook);
+        void Save(Log log);
 
         void Commit();
-
     }
 }

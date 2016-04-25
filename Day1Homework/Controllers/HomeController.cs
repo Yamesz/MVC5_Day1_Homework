@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Day1Homework.Models;
 using Day1Homework.Models.ViewModels;
+using Day1Homework.Repositories;
 using Day1Homework.Service;
 using Day1Homework.Service.Dapper;
+using Day1Homework.Service.EF;
 using Day1Homework.Service.Interface;
 using Day1Homework.Utility;
 using Microsoft.Practices.Unity;
@@ -17,10 +19,18 @@ namespace Day1Homework.Controllers
     public class HomeController : Controller
     {
         public IAccountBookService accountBookService { get; set; }
+        public ILogService logService { get; set; }
 
-        public HomeController(IAccountBookService service)
+        public HomeController(
+            IAccountBookService accountBookService,
+            ILogService logService)
         {
-            this.accountBookService = service;
+            //var unitOfWork = new EFUnitOfWork();
+            //this.accountBookService = new AccountBookService(unitOfWork);
+            //this.logService = new LogService(unitOfWork);
+            this.accountBookService = accountBookService;
+            this.logService = logService;
+
         }
 
         public ActionResult Index()
@@ -35,7 +45,21 @@ namespace Day1Homework.Controllers
             DescriptionValidate(moneyRecordViewModel);
             if (ModelState.IsValid)
             {
+                AccountBook accountBook =
+                Mapper.Map<AccountBook>(moneyRecordViewModel);
+                accountBook.Id = Guid.NewGuid();
+                accountBook.Remarkkk = accountBook.Remarkkk ?? " ";
+                this.accountBookService.Save(accountBook);
 
+                this.logService.Save(new Log
+                {
+                    AccountBookID = accountBook.Id,
+                    Email = "a@a.a",
+                    Name = "test"
+                });
+                this.logService.Commit();
+
+                ModelState.Clear();
             }
             return View();
         }

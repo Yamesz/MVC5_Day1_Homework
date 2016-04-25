@@ -19,6 +19,12 @@ namespace Day1Homework.App_Start
                 .ForMember(target => target.money, option => option.MapFrom(source => source.Amounttt))
                 .ForMember(target => target.date, option => option.MapFrom(source => source.Dateee))
                 .ForMember(target => target.description, option => option.MapFrom(source => source.Remarkkk));
+               cfg.CreateMap<MoneyRecordViewModel, AccountBook>()
+                .ForMember(target => target.Id, option => option.MapFrom(source => source.accountBookID))
+                .ForMember(target => target.Categoryyy, option => option.MapFrom(source => source.category))
+                .ForMember(target => target.Amounttt, option => option.MapFrom(source => source.money))
+                .ForMember(target => target.Dateee, option => option.MapFrom(source => source.date))
+                .ForMember(target => target.Remarkkk, option => option.MapFrom(source => source.description));
             });
 
             //Mapper.Initialize(x =>

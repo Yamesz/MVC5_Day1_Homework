@@ -17,8 +17,8 @@ namespace Day1Homework.Models
 
         public DateTime Dateee { get; set; }
 
-        [Required]
-        [StringLength(500)]
+        //[Required]
+        [StringLength(100)]
         public string Remarkkk { get; set; }
     }
 }

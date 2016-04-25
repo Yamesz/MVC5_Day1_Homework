@@ -1,36 +1,28 @@
-﻿using Day1Homework.Service.Interface;
+﻿using Day1Homework.Models;
+using Day1Homework.Repositories;
+using Day1Homework.Service.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Day1Homework.Models;
-using Day1Homework.Repositories;
 
-namespace Day1Homework.Service
+namespace Day1Homework.Service.EF
 {
-    public class AccountBookService : IAccountBookService
+    public class LogService: ILogService
     {
         private Money _db;
         private readonly IUnitOfWork _unitOfWork;
 
-        public AccountBookService(IUnitOfWork unitOfWork)
+        public LogService(IUnitOfWork unitOfWork)
         {
             this._unitOfWork = unitOfWork;
             this._db = this._unitOfWork.Context;
         }
 
-        public IEnumerable<AccountBook> GetPageData(int page, int pageSize)
+        public void Save(Log log)
         {
-            return _db.AccountBook
-                    .OrderByDescending(x=>x.Dateee)
-                    .Skip((page-1)* pageSize)
-                    .Take(pageSize)
-                    .ToList();
-        }
-
-        public void Save(AccountBook accountBook)
-        {
-            _db.AccountBook.Add(accountBook);
+            _db.Log.Add(log);
+            
         }
 
         public void Commit()
@@ -55,7 +47,5 @@ namespace Day1Homework.Service
                 }
             }
         }
-
-        
     }
 }

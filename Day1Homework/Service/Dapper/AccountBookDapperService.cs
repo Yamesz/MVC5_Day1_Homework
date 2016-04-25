@@ -43,9 +43,19 @@ namespace Day1Homework.Service.Dapper
             }
         }
 
+        public void Commit()
+        {
+            //_unitOfWork.Save();
+        }
+
         public void Dispose()
         {
             GC.SuppressFinalize(this);
+        }
+
+        public void Save(AccountBook accountBook)
+        {
+            throw new NotImplementedException();
         }
     }
 }
