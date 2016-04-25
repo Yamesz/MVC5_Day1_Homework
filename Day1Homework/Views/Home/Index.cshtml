@@ -62,6 +62,8 @@
 </div>
 @Html.Action("MoneyRecordList")
 
+
+
 @section pagejs
 {
     <script>
@@ -81,5 +83,17 @@
                     options.messages['notgreaterthantoday'] = options.message;
                 }
             });
+
     </script>
+
+    @if (ViewBag.Status == "success")
+    {
+        <script>
+            swal(
+              '記帳成功!',
+              '',
+              'success'
+            );
+        </script>
+    }
 }

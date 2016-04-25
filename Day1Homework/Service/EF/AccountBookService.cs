@@ -30,6 +30,8 @@ namespace Day1Homework.Service
 
         public void Save(AccountBook accountBook)
         {
+            accountBook.Id = Guid.NewGuid();
+            accountBook.Remarkkk = accountBook.Remarkkk ?? string.Empty;
             _db.AccountBook.Add(accountBook);
         }
 

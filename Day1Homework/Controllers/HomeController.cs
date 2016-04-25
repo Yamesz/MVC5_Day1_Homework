@@ -35,6 +35,10 @@ namespace Day1Homework.Controllers
 
         public ActionResult Index()
         {
+            if (TempData["status"] != null)
+            {
+                ViewBag.Status = TempData["status"];
+            }
             return View();
         }
 
@@ -46,9 +50,8 @@ namespace Day1Homework.Controllers
             if (ModelState.IsValid)
             {
                 AccountBook accountBook =
-                Mapper.Map<AccountBook>(moneyRecordViewModel);
-                accountBook.Id = Guid.NewGuid();
-                accountBook.Remarkkk = accountBook.Remarkkk ?? " ";
+                    Mapper.Map<AccountBook>(moneyRecordViewModel);
+
                 this.accountBookService.Save(accountBook);
 
                 this.logService.Save(new Log
@@ -59,7 +62,9 @@ namespace Day1Homework.Controllers
                 });
                 this.logService.Commit();
 
-                ModelState.Clear();
+                //ModelState.Clear();
+                TempData["status"] = "success";
+                return RedirectToAction("Index");
             }
             return View();
         }
