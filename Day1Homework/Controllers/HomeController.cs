@@ -44,15 +44,13 @@ namespace Day1Homework.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(MoneyRecordViewModel moneyRecordViewModel)
+        public ActionResult Index([Bind(Exclude= "accountBookID")] MoneyRecordViewModel moneyRecordViewModel)
         {
             DescriptionValidate(moneyRecordViewModel);
             if (ModelState.IsValid)
             {
                 AccountBook accountBook =
                     Mapper.Map<AccountBook>(moneyRecordViewModel);
-
-                
                 try
                 {
                     this.accountBookService.Save(accountBook);
@@ -72,6 +70,12 @@ namespace Day1Homework.Controllers
                     }
                     
                     this.logService.Commit();
+                    TempData["AlertViewModel"] = new AlertViewModel
+                    {
+                        Title = "記帳成功",
+                        Msg = "持續下去",
+                        Status = "success"
+                    };
                 }
                 catch (Exception ex)
                 {
@@ -81,17 +85,9 @@ namespace Day1Homework.Controllers
                         Msg = ex.Message,
                         Status = "error"
                     };
-                    return RedirectToAction("Index");
                 }
-
-                //ModelState.Clear();
-                TempData["AlertViewModel"] = new AlertViewModel
-                {
-                    Title = "記帳成功",
-                    Msg = "持續下去",
-                    Status = "success"
-                };  
                 return RedirectToAction("Index");
+
             }
             return View();
         }

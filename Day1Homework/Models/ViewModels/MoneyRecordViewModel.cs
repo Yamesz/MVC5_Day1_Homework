@@ -18,6 +18,9 @@ namespace Day1Homework.Models.ViewModels
 
         [Display(Name = "金額")]
         [Required]
+        //作業要求的正整數
+        //自己加入 當金額是0時，請輸入備註的客製化驗證
+        //[Range(1, uint.MaxValue)]
         public uint money { get; set; }
 
         [Display(Name = "日期")]
@@ -25,14 +28,12 @@ namespace Day1Homework.Models.ViewModels
         [Required]
         [NotGreaterThanToday]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        
         public DateTime date { get; set; }
 
         
         [Display(Name = "備註")]
         [DataType(DataType.MultilineText)]
         public string description { get; set; }
-
 
         //ref http://www.itorian.com/2013/02/custom-validation-with.html
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
