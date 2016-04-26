@@ -35,9 +35,9 @@ namespace Day1Homework.Controllers
 
         public ActionResult Index()
         {
-            if (TempData["status"] != null)
+            if (TempData["AlertViewModel"] != null)
             {
-                ViewBag.Status = TempData["status"];
+                ViewData["AlertViewModel"] = TempData["AlertViewModel"];
             }
             return View();
         }
@@ -52,18 +52,45 @@ namespace Day1Homework.Controllers
                 AccountBook accountBook =
                     Mapper.Map<AccountBook>(moneyRecordViewModel);
 
-                this.accountBookService.Save(accountBook);
-
-                this.logService.Save(new Log
+                
+                try
                 {
-                    AccountBookID = accountBook.Id,
-                    Email = "a@a.a",
-                    Name = "test"
-                });
-                this.logService.Commit();
+                    this.accountBookService.Save(accountBook);
+
+                    this.logService.Save(new Log
+                    {
+                        AccountBookID = accountBook.Id,
+                        Email = "a@a.a",
+                        Name = "test"
+                    });
+
+                    //測試錯誤情況
+                    if(accountBook.Amounttt == 444)
+                    {
+                        int a = 0;
+                        int b = 1 / a;
+                    }
+                    
+                    this.logService.Commit();
+                }
+                catch (Exception ex)
+                {
+                    TempData["AlertViewModel"] = new AlertViewModel
+                    {
+                        Title = "記帳失敗",
+                        Msg = ex.Message,
+                        Status = "error"
+                    };
+                    return RedirectToAction("Index");
+                }
 
                 //ModelState.Clear();
-                TempData["status"] = "success";
+                TempData["AlertViewModel"] = new AlertViewModel
+                {
+                    Title = "記帳成功",
+                    Msg = "持續下去",
+                    Status = "success"
+                };  
                 return RedirectToAction("Index");
             }
             return View();

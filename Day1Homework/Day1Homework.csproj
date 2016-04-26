@@ -215,6 +215,7 @@
     <Compile Include="Models\Enums\MoneyCategory.cs" />
     <Compile Include="Models\Log.cs" />
     <Compile Include="Models\Money.cs" />
+    <Compile Include="Models\ViewModels\AlertViewModel.cs" />
     <Compile Include="Models\ViewModels\MoneyRecordViewModel.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -293,6 +294,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\MoneyRecordList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\MoneyCategory.cshtml" />
+    <Content Include="Views\Shared\_sweetalert2.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

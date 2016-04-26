@@ -21,7 +21,7 @@
             </tr>
             @foreach (var item in Model)
             {
-                <tr>
+                <tr class="@GerColor(item.category)">
                     <td>@(++recordCount)</td>
                     <td>
                         @Html.DisplayFor(modelItem => item.category)
@@ -37,3 +37,16 @@
         </table>
     </div>
 </div>
+
+@helper GerColor(MoneyCategory value)
+{
+    switch (value)
+    {
+        case MoneyCategory.pay:
+            @:danger
+            break;
+        case MoneyCategory.income:
+            @:info
+            break;
+    }
+}

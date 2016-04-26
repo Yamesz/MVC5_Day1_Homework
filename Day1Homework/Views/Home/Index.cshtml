@@ -86,14 +86,8 @@
 
     </script>
 
-    @if (ViewBag.Status == "success")
+    @if (ViewData["AlertViewModel"] != null)
     {
-        <script>
-            swal(
-              '記帳成功!',
-              '',
-              'success'
-            );
-        </script>
+        @Html.Partial("_sweetalert2", ViewData["AlertViewModel"])
     }
 }
