@@ -17,6 +17,7 @@ using Newtonsoft.Json;
 
 namespace Day1Homework.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public IAccountBookService accountBookService { get; set; }
@@ -114,6 +115,7 @@ namespace Day1Homework.Controllers
             return View(moneyRecordList);
         }
 
+        [AllowAnonymous]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -121,6 +123,7 @@ namespace Day1Homework.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

@@ -5,6 +5,11 @@ using Day1Homework.Repositories;
 using Day1Homework.Service.Interface;
 using Day1Homework.Service.EF;
 using Day1Homework.Service;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Day1Homework.Models;
+using System.Data.Entity;
+using Day1Homework.Controllers;
 
 namespace Day1Homework.App_Start
 {
@@ -50,6 +55,21 @@ namespace Day1Homework.App_Start
             //.RegisterType<IUnitOfWorkAsync, UnitOfWork>(new PerRequestLifetimeManager())
             //.RegisterType<IRepositoryAsync<Customer>, Repository<Customer>>();
 
+            //container.RegisterType(typeof(UserManager<>),
+            //new InjectionConstructor(typeof(IUserStore<>)));
+            //container.RegisterType<Microsoft.AspNet.Identity.IUser>(new InjectionFactory(c => c.Resolve<Microsoft.AspNet.Identity.IUser>()));
+            //container.RegisterType(typeof(IUserStore<>), typeof(UserStore<>));
+            //container.RegisterType<IdentityUser, ApplicationUser>(new ContainerControlledLifetimeManager());
+            //container.RegisterType<DbContext, ApplicationDbContext>(new ContainerControlledLifetimeManager());
+
+            container.RegisterType<DbContext, ApplicationDbContext>(new HierarchicalLifetimeManager());
+            container.RegisterType<UserManager<ApplicationUser>>(
+                new HierarchicalLifetimeManager());
+            container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(
+                new HierarchicalLifetimeManager());
+
+            container.RegisterType<AccountController>(
+                new InjectionConstructor());
         }
     }
 }
