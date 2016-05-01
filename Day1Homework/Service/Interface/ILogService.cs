@@ -8,7 +8,7 @@ namespace Day1Homework.Service.Interface
 {
     public interface ILogService : IDisposable
     {
-        void Save(Log log);
+        void Add(Log log);
 
         void Commit();
     }

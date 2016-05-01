@@ -28,7 +28,7 @@ namespace Day1Homework.Service
                     .ToList();
         }
 
-        public void Save(AccountBook accountBook)
+        public void Add(AccountBook accountBook)
         {
             accountBook.Id = Guid.NewGuid();
             accountBook.Remarkkk = accountBook.Remarkkk ?? string.Empty;

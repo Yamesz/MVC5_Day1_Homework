@@ -19,7 +19,7 @@ namespace Day1Homework.Service.EF
             this._db = this._unitOfWork.Context;
         }
 
-        public void Save(Log log)
+        public void Add(Log log)
         {
             _db.Log.Add(log);
             

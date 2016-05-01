@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 
 namespace Day1Homework.Controllers
 {
@@ -35,16 +36,25 @@ namespace Day1Homework.Controllers
 
         public ActionResult Index()
         {
-            if (TempData["AlertViewModel"] != null)
+            if (Request.Cookies["AlertViewModel"] != null)
             {
-                ViewData["AlertViewModel"] = TempData["AlertViewModel"];
+                HttpCookie alertViewModelCookie = Request.Cookies["AlertViewModel"];
+                ViewData["AlertViewModel"] = 
+                    JsonConvert.DeserializeObject<AlertViewModel>(alertViewModelCookie.Value);
+                alertViewModelCookie.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(alertViewModelCookie);
             }
             return View();
         }
 
+        public ActionResult add()
+        {
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index([Bind(Exclude= "accountBookID")] MoneyRecordViewModel moneyRecordViewModel)
+        public ActionResult add([Bind(Exclude= "accountBookID")] MoneyRecordViewModel moneyRecordViewModel)
         {
             DescriptionValidate(moneyRecordViewModel);
             if (ModelState.IsValid)
@@ -53,9 +63,9 @@ namespace Day1Homework.Controllers
                     Mapper.Map<AccountBook>(moneyRecordViewModel);
                 try
                 {
-                    this.accountBookService.Save(accountBook);
+                    this.accountBookService.Add(accountBook);
 
-                    this.logService.Save(new Log
+                    this.logService.Add(new Log
                     {
                         AccountBookID = accountBook.Id,
                         Email = "a@a.a",
@@ -70,26 +80,28 @@ namespace Day1Homework.Controllers
                     }
                     
                     this.logService.Commit();
-                    TempData["AlertViewModel"] = new AlertViewModel
+                    HttpCookie cookie = new HttpCookie("AlertViewModel");
+                    cookie.Value = JsonConvert.SerializeObject(new AlertViewModel
                     {
                         Title = "記帳成功",
                         Msg = "持續下去",
                         Status = "success"
-                    };
+                    });
+                    Response.Cookies.Add(cookie);
+                   
+                    return RedirectToAction("Index");
                 }
                 catch (Exception ex)
                 {
-                    TempData["AlertViewModel"] = new AlertViewModel
+                    ViewData["AlertViewModel"] = new AlertViewModel
                     {
                         Title = "記帳失敗",
                         Msg = ex.Message,
                         Status = "error"
                     };
                 }
-                return RedirectToAction("Index");
-
             }
-            return View();
+            return View("index");
         }
 
         [ChildActionOnly]
@@ -119,7 +131,10 @@ namespace Day1Homework.Controllers
         #region private 方法
         private void DescriptionValidate(MoneyRecordViewModel moneyRecordViewModel)
         {
-            var descriptionLength = moneyRecordViewModel.description == null
+            //var descriptionLength = moneyRecordViewModel.description == null
+            //                        ? 0
+            //                        : moneyRecordViewModel.description.Length;
+            var descriptionLength = string.IsNullOrWhiteSpace(moneyRecordViewModel.description)
                                     ? 0
                                     : moneyRecordViewModel.description.Length;
 

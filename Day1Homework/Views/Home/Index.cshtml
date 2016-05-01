@@ -4,10 +4,10 @@
 }
 
 <div class="well" style="margin-top:60px">
-    
+
     @*AJAX還沒完成*@
     @*@using (Ajax.BeginForm("index",new { Controller ="Home"}, new AjaxOptions() { UpdateTargetId = "ajax" }, new { @class = "form-horizontal" }))*@
-    @using (Html.BeginForm("index", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+    @using (Html.BeginForm("add", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
     {
         @Html.AntiForgeryToken()
 
@@ -26,13 +26,13 @@
             @Html.LabelFor(model => model.money, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-sm-10">
                 @Html.EditorFor(model => model.money, new
-                   {
-                       htmlAttributes = new
-                       {
-                           @class = "form-control",
-                           placeholder = Html.DisplayNameFor(m => m.money)
-                       }
-                   })
+           {
+               htmlAttributes = new
+               {
+                   @class = "form-control",
+                   placeholder = Html.DisplayNameFor(m => m.money)
+               }
+           })
                 @Html.ValidationMessageFor(model => model.money, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -40,12 +40,13 @@
             @Html.LabelFor(model => model.date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-sm-10">
                 @Html.EditorFor(model => model.date, new
-                   {
-                       htmlAttributes = new {
-                           @class = "form-control",
-                           placeholder = Html.DisplayNameFor(m => m.date)
-                       }
-                   })
+           {
+               htmlAttributes = new
+               {
+                   @class = "form-control",
+                   placeholder = Html.DisplayNameFor(m => m.date)
+               }
+           })
                 @Html.ValidationMessageFor(model => model.date, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -69,22 +70,15 @@
 {
     <script>
         $.validator.addMethod('notgreaterthantoday', function (value, element, param) {
-                if (value) {
-                    var d = Date.parse(value);
-                    if (d > new Date) {
-                        return false;
-                    }
+            if (value) {
+                var d = Date.parse(value);
+                if (d > new Date) {
+                    return false;
                 }
-                return true;
-            });
-            $.validator.unobtrusive.adapters.add(
-            'notgreaterthantoday', ['other'], function (options) {
-                options.rules['notgreaterthantoday'] = '#' + options.params.other;
-                if (options.message) {
-                    options.messages['notgreaterthantoday'] = options.message;
-                }
-            });
-
+            }
+            return true;
+        });
+        $.validator.unobtrusive.adapters.addBool('notgreaterthantoday');
     </script>
 
     @if (ViewData["AlertViewModel"] != null)

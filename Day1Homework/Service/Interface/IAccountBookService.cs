@@ -10,7 +10,7 @@ namespace Day1Homework.Service.Interface
     {
         IEnumerable<AccountBook> GetPageData(int page,int pageSize);
 
-        void Save(AccountBook accountBook);
+        void Add(AccountBook accountBook);
 
         void Commit();
 

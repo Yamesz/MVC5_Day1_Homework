@@ -53,7 +53,7 @@ namespace Day1Homework.Service.Dapper
             GC.SuppressFinalize(this);
         }
 
-        public void Save(AccountBook accountBook)
+        public void Add(AccountBook accountBook)
         {
             throw new NotImplementedException();
         }
