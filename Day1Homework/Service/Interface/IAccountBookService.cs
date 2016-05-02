@@ -14,5 +14,7 @@ namespace Day1Homework.Service.Interface
 
         void Commit();
 
+        AccountBook GetRecord(Guid id);
+        void Edit(AccountBook accountBook);
     }
 }

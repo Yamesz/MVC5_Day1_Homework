@@ -57,5 +57,15 @@ namespace Day1Homework.Service.Dapper
         {
             throw new NotImplementedException();
         }
+
+        public AccountBook GetRecord(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Edit(AccountBook accountBook)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

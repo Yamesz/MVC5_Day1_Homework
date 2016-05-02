@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using Day1Homework.Models;
 using Day1Homework.Repositories;
+using System.Data.Entity;
 
 namespace Day1Homework.Service
 {
@@ -26,6 +27,19 @@ namespace Day1Homework.Service
                     .Skip((page-1)* pageSize)
                     .Take(pageSize)
                     .ToList();
+        }
+
+        public AccountBook GetRecord(Guid id)
+        {
+            return _db.AccountBook
+                    .Where(x => x.Id == id)
+                    .Single();
+                    
+        }
+
+        public void Edit(AccountBook accountBook)
+        {
+            _db.Entry(accountBook).State = EntityState.Modified;
         }
 
         public void Add(AccountBook accountBook)

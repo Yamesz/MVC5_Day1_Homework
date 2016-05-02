@@ -1,21 +1,23 @@
-﻿@model MoneyRecordViewModel
+﻿@model Day1Homework.Models.ViewModels.MoneyRecordViewModel
+
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="well" style="margin-top:60px">
+<h2>Edit</h2>
 
-    @*AJAX還沒完成*@
-    @*@using (Ajax.BeginForm("index",new { Controller ="Home"}, new AjaxOptions() { UpdateTargetId = "ajax" }, new { @class = "form-horizontal" }))*@
-    @using (Html.BeginForm("add", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
-    {
-        @Html.AntiForgeryToken()
+@using (Html.BeginForm("Edit", "Money", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    
+    @Html.Partial("~/Views/Shared/_MoneyForm.cshtml")
+}
 
-        @Html.Partial("~/Views/Shared/_MoneyForm.cshtml")
-
-    }
+<div>
+    @Html.ActionLink("Back to List", "Index")
 </div>
-@Html.Action("MoneyRecordList")
+
 
 @section pagejs
 {

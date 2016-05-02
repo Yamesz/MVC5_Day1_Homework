@@ -64,13 +64,13 @@ namespace Day1Homework.Controllers
                     Mapper.Map<AccountBook>(moneyRecordViewModel);
                 try
                 {
-                    this.accountBookService.Add(accountBook);
+                    this.accountBookService.Edit(accountBook);
 
                     this.logService.Add(new Log
                     {
                         AccountBookID = accountBook.Id,
                         Email = "a@a.a",
-                        Name = "test"
+                        Name = "test edit"
                     });
 
                     //測試錯誤情況
@@ -102,7 +102,7 @@ namespace Day1Homework.Controllers
                     };
                 }
             }
-            return View("index");
+            return View();
         }
 
         [ChildActionOnly]
@@ -134,9 +134,6 @@ namespace Day1Homework.Controllers
         #region private 方法
         private void DescriptionValidate(MoneyRecordViewModel moneyRecordViewModel)
         {
-            //var descriptionLength = moneyRecordViewModel.description == null
-            //                        ? 0
-            //                        : moneyRecordViewModel.description.Length;
             var descriptionLength = string.IsNullOrWhiteSpace(moneyRecordViewModel.description)
                                     ? 0
                                     : moneyRecordViewModel.description.Length;

@@ -2,6 +2,8 @@
 @{
     Layout = null;
     int recordCount = 0;
+    string area = (string)ViewContext.RouteData.DataTokens["area"];
+    bool isAdmin = area == "skilltree";
 }
 
 <div class="row">
@@ -18,6 +20,15 @@
                 <th>
                     @Html.DisplayNameFor(model => model.money)
                 </th>
+                @{
+                    if (isAdmin)
+                    {
+                        <th>
+                            <span class="fa fa-wrench"></span>
+                        </th>
+                    }
+                }
+                
             </tr>
             @foreach (var item in Model)
             {
@@ -32,6 +43,17 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.money)
                     </td>
+                    @{
+                        if (isAdmin)
+                        {
+                            <td>
+                                <a href="@Url.Action("Edit",new {id=item.accountBookID })">
+                                    <span class="fa fa-pencil-square"></span>
+                                </a>
+                            </td>
+                        }
+                    }
+                    
                 </tr>
             }
         </table>

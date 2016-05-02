@@ -243,3 +243,6 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/Day1Homework/Areas/skilltree/Controllers/AccountBooksController.cs
+/Day1Homework/Areas/skilltree/Views/AccountBooks
+/Day1Homework/Areas/skilltree/Views/Money/View.cshtml
