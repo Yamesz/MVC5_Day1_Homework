@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Day1Homework.CustomValidation
+namespace Day1Homework.CustomAttribute
 {
     //ref https://hossamhassan47.wordpress.com/2012/12/09/mvc-4-0-how-to-support-client-side-custom-validation/
     public class NotGreaterThanTodayAttribute : ValidationAttribute, IClientValidatable

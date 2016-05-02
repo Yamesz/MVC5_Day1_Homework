@@ -1,4 +1,4 @@
-﻿using Day1Homework.CustomValidation;
+﻿using Day1Homework.CustomAttribute;
 using Day1Homework.Models.Enums;
 using System;
 using System.Collections.Generic;

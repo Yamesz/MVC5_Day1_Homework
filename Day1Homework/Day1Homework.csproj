@@ -205,10 +205,13 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Areas\skilltree\Controllers\MoneyController.cs" />
+    <Compile Include="Areas\skilltree\skilltreeAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="CustomValidation\NotGreaterThanTodayAttribute.cs" />
+    <Compile Include="CustomAttribute\CustomAuthorizeAttribute.cs" />
+    <Compile Include="CustomAttribute\NotGreaterThanTodayAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -245,6 +248,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\skilltree\Views\web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -299,7 +303,11 @@
     <Content Include="Views\Shared\DisplayTemplates\MoneyCategory.cshtml" />
     <Content Include="Views\Shared\_sweetalert2.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Areas\skilltree\Models\" />
+    <Folder Include="Areas\skilltree\Views\Money\" />
+    <Folder Include="Areas\skilltree\Views\Shared\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
