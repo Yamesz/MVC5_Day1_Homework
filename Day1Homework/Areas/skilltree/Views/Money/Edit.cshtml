@@ -10,7 +10,7 @@
 @using (Html.BeginForm("Edit", "Money", FormMethod.Post, new { @class = "form-horizontal" }))
 {
     @Html.AntiForgeryToken()
-    
+    @Html.HiddenFor(x=>x.accountBookID)
     @Html.Partial("~/Views/Shared/_MoneyForm.cshtml")
 }
 

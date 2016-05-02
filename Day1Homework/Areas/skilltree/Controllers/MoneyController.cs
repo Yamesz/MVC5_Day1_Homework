@@ -3,6 +3,7 @@ using Day1Homework.CustomAttribute;
 using Day1Homework.Models;
 using Day1Homework.Models.ViewModels;
 using Day1Homework.Service.Interface;
+using MvcPaging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace Day1Homework.Areas.skilltree.Controllers
     {
         public IAccountBookService accountBookService { get; set; }
         public ILogService logService { get; set; }
+        private int defaultPageSize;
 
         public MoneyController(
             IAccountBookService accountBookService,
@@ -27,11 +29,19 @@ namespace Day1Homework.Areas.skilltree.Controllers
             //this.logService = new LogService(unitOfWork);
             this.accountBookService = accountBookService;
             this.logService = logService;
-
+            this.defaultPageSize = 50;
         }
 
         public ActionResult Index()
         {
+            if (Request.Cookies["AlertViewModel"] != null)
+            {
+                HttpCookie alertViewModelCookie = Request.Cookies["AlertViewModel"];
+                ViewData["AlertViewModel"] =
+                    JsonConvert.DeserializeObject<AlertViewModel>(alertViewModelCookie.Value);
+                alertViewModelCookie.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(alertViewModelCookie);
+            }
             return View();
         }
         
@@ -94,14 +104,27 @@ namespace Day1Homework.Areas.skilltree.Controllers
             return View();
         }
 
+        //[ChildActionOnly]
+        //public ActionResult ()
+        //{
+        //    var model = accountBookService.GetPageData(1, 999);
+        //    List<MoneyRecordViewModel> moneyRecordList =
+        //        Mapper.Map<List<MoneyRecordViewModel>>(model);
+
+        //    return View("MoneyRecordList", moneyRecordList);
+        //}
+
         [ChildActionOnly]
-        public ActionResult AdminMoneyRecordList()
+        public ActionResult AdminMoneyRecordList(int? page)
         {
-            var model = accountBookService.GetPageData(1, 999);
+            int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
+            int Skip = currentPageIndex * defaultPageSize;
+            var totalCount = accountBookService.GetTotalCount();
+            var model = accountBookService.GetPageData(currentPageIndex, defaultPageSize);
             List<MoneyRecordViewModel> moneyRecordList =
                 Mapper.Map<List<MoneyRecordViewModel>>(model);
-
-            return View("MoneyRecordList", moneyRecordList);
+            ViewData.Model = moneyRecordList.ToPagedList(currentPageIndex, defaultPageSize, totalCount);
+            return View("MoneyRecordList");
         }
 
         #region private 方法

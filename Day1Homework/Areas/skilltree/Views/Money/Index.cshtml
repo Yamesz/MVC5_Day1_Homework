@@ -1,8 +1,15 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div style="margin-top:60px">
-    
-</div>
-    @Html.Action("AdminMoneyRecordList")
+<div style="margin-top:60px"></div>
 
+@Html.Action("AdminMoneyRecordList")
+
+@section pagejs
+{
+
+    @if (ViewData["AlertViewModel"] != null)
+    {
+        @Html.Partial("_sweetalert2", ViewData["AlertViewModel"])
+    }
+}

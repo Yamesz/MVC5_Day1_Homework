@@ -14,6 +14,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
+using MvcPaging;
 
 namespace Day1Homework.Controllers
 {
@@ -22,6 +23,7 @@ namespace Day1Homework.Controllers
     {
         public IAccountBookService accountBookService { get; set; }
         public ILogService logService { get; set; }
+        private int defaultPageSize;
 
         public HomeController(
             IAccountBookService accountBookService,
@@ -32,6 +34,7 @@ namespace Day1Homework.Controllers
             //this.logService = new LogService(unitOfWork);
             this.accountBookService = accountBookService;
             this.logService = logService;
+            this.defaultPageSize = 20;
 
         }
 
@@ -64,7 +67,7 @@ namespace Day1Homework.Controllers
                     Mapper.Map<AccountBook>(moneyRecordViewModel);
                 try
                 {
-                    this.accountBookService.Edit(accountBook);
+                    this.accountBookService.Add(accountBook);
 
                     this.logService.Add(new Log
                     {
@@ -102,17 +105,20 @@ namespace Day1Homework.Controllers
                     };
                 }
             }
-            return View();
+            return View("Index");
         }
 
         [ChildActionOnly]
-        public ActionResult MoneyRecordList()
+        public ActionResult MoneyRecordList(int? page)
         {
-            var model = accountBookService.GetPageData(1, 5);
+            int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
+            int Skip = currentPageIndex * defaultPageSize;
+            var totalCount = accountBookService.GetTotalCount();
+            var model = accountBookService.GetPageData(currentPageIndex, defaultPageSize);
             List<MoneyRecordViewModel> moneyRecordList =
                 Mapper.Map<List<MoneyRecordViewModel>>(model);
-
-            return View(moneyRecordList);
+            ViewData.Model = moneyRecordList.ToPagedList(currentPageIndex, defaultPageSize, totalCount);
+            return View();
         }
 
         [AllowAnonymous]

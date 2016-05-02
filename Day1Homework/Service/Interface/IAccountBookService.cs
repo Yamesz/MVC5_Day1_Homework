@@ -8,13 +8,16 @@ namespace Day1Homework.Service.Interface
 {
     public interface IAccountBookService: IDisposable
     {
-        IEnumerable<AccountBook> GetPageData(int page,int pageSize);
+        IEnumerable<AccountBook> GetPageData(int pageIndex,int pageSize);
 
         void Add(AccountBook accountBook);
 
         void Commit();
 
         AccountBook GetRecord(Guid id);
+
         void Edit(AccountBook accountBook);
+
+        int GetTotalCount();
     }
 }

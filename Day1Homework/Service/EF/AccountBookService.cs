@@ -20,11 +20,11 @@ namespace Day1Homework.Service
             this._db = this._unitOfWork.Context;
         }
 
-        public IEnumerable<AccountBook> GetPageData(int page, int pageSize)
+        public IEnumerable<AccountBook> GetPageData(int pageIndex, int pageSize)
         {
             return _db.AccountBook
                     .OrderByDescending(x=>x.Dateee)
-                    .Skip((page-1)* pageSize)
+                    .Skip((pageIndex) * pageSize)
                     .Take(pageSize)
                     .ToList();
         }
@@ -47,6 +47,11 @@ namespace Day1Homework.Service
             accountBook.Id = Guid.NewGuid();
             accountBook.Remarkkk = accountBook.Remarkkk ?? string.Empty;
             _db.AccountBook.Add(accountBook);
+        }
+
+        public int GetTotalCount()
+        {
+            return _db.AccountBook.Select(x => x.Id).Count();
         }
 
         public void Commit()

@@ -1,4 +1,6 @@
-﻿@model IEnumerable<MoneyRecordViewModel>
+﻿@using MvcPaging;
+
+@model IPagedList<MoneyRecordViewModel>
 @{
     Layout = null;
     int recordCount = 0;
@@ -12,13 +14,13 @@
             <tr>
                 <th>#</th>
                 <th>
-                    @Html.DisplayNameFor(model => model.category)
+                    @Html.DisplayNameFor(model => model.First().category)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.date)
+                    @Html.DisplayNameFor(model => model.First().date)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.money)
+                    @Html.DisplayNameFor(model => model.First().money)
                 </th>
                 @{
                     if (isAdmin)
@@ -59,6 +61,13 @@
         </table>
     </div>
 </div>
+
+@Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount).Options(o => o
+        .DisplayTemplate("BootstrapPagination")
+        .Action("Index")
+        .MaxNrOfPages(10)
+        .AlwaysAddFirstPageNumber()
+    )
 
 @helper GerColor(MoneyCategory value)
 {

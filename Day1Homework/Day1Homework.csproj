@@ -77,6 +77,10 @@
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MvcPaging, Version=2.1.4.31, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcPaging.2.1.4\lib\net40\MvcPaging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -320,6 +324,7 @@
     <Content Include="Views\Shared\DisplayTemplates\MoneyCategory.cshtml" />
     <Content Include="Views\Shared\_sweetalert2.cshtml" />
     <Content Include="Views\Shared\_MoneyForm.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\BootstrapPagination.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\skilltree\Models\" />

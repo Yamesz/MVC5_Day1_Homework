@@ -18,7 +18,7 @@ namespace Day1Homework.Service.Dapper
             this.ConnectionString = ConfigurationManager.ConnectionStrings["Money"].ConnectionString;
         }
  
-        public IEnumerable<AccountBook> GetPageData(int page, int pageSize)
+        public IEnumerable<AccountBook> GetPageData(int pageIndex, int pageSize)
         {
             using (var conn = new SqlConnection(this.ConnectionString))
             {
@@ -35,7 +35,7 @@ namespace Day1Homework.Service.Dapper
                     sqlStatement,
                     new
                     {
-                        skip = (page-1) * pageSize,
+                        skip = pageIndex * pageSize,
                         Take = pageSize
                     });
 
@@ -64,6 +64,11 @@ namespace Day1Homework.Service.Dapper
         }
 
         public void Edit(AccountBook accountBook)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetTotalCount()
         {
             throw new NotImplementedException();
         }
