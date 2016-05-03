@@ -1,4 +1,10 @@
 ﻿@model AlertViewModel
+@{ 
+    if(Model == null || string.IsNullOrWhiteSpace(Model.Title))
+    {
+        return;
+    }
+}
 <script>
     swal(
       '@Model.Title',
