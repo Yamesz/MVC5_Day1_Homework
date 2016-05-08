@@ -3,7 +3,6 @@ using Day1Homework.Models;
 using Day1Homework.Models.ViewModels;
 using Day1Homework.Repositories;
 using Day1Homework.Service;
-using Day1Homework.Service.Dapper;
 using Day1Homework.Service.EF;
 using Day1Homework.Service.Interface;
 using Day1Homework.Utility;
@@ -14,7 +13,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
-using MvcPaging;
+using PagedList;
 
 namespace Day1Homework.Controllers
 {
@@ -111,13 +110,10 @@ namespace Day1Homework.Controllers
         [ChildActionOnly]
         public ActionResult MoneyRecordList(int? page)
         {
-            int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
-            int Skip = currentPageIndex * defaultPageSize;
-            var totalCount = accountBookService.GetTotalCount();
-            var model = accountBookService.GetPageData(currentPageIndex, defaultPageSize);
-            List<MoneyRecordViewModel> moneyRecordList =
-                Mapper.Map<List<MoneyRecordViewModel>>(model);
-            ViewData.Model = moneyRecordList.ToPagedList(currentPageIndex, defaultPageSize, totalCount);
+            var model = accountBookService.GetPageData(page, defaultPageSize);
+            var viewModel = model.ToMappedPagedList<AccountBook, MoneyRecordViewModel>();
+            ViewData.Model = viewModel;
+
             return View();
         }
 

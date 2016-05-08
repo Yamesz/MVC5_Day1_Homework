@@ -1,4 +1,5 @@
 ﻿using Day1Homework.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace Day1Homework.Service.Interface
 {
     public interface IAccountBookService: IDisposable
     {
-        IEnumerable<AccountBook> GetPageData(int pageIndex,int pageSize);
+        IPagedList<AccountBook> GetPageData(int? page,int pageSize);
 
         void Add(AccountBook accountBook);
 

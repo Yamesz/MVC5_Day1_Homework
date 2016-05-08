@@ -3,7 +3,7 @@ using Day1Homework.CustomAttribute;
 using Day1Homework.Models;
 using Day1Homework.Models.ViewModels;
 using Day1Homework.Service.Interface;
-using MvcPaging;
+using Day1Homework.Utility;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -104,26 +104,12 @@ namespace Day1Homework.Areas.skilltree.Controllers
             return View();
         }
 
-        //[ChildActionOnly]
-        //public ActionResult ()
-        //{
-        //    var model = accountBookService.GetPageData(1, 999);
-        //    List<MoneyRecordViewModel> moneyRecordList =
-        //        Mapper.Map<List<MoneyRecordViewModel>>(model);
-
-        //    return View("MoneyRecordList", moneyRecordList);
-        //}
-
         [ChildActionOnly]
         public ActionResult AdminMoneyRecordList(int? page)
         {
-            int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
-            int Skip = currentPageIndex * defaultPageSize;
-            var totalCount = accountBookService.GetTotalCount();
-            var model = accountBookService.GetPageData(currentPageIndex, defaultPageSize);
-            List<MoneyRecordViewModel> moneyRecordList =
-                Mapper.Map<List<MoneyRecordViewModel>>(model);
-            ViewData.Model = moneyRecordList.ToPagedList(currentPageIndex, defaultPageSize, totalCount);
+            var model = accountBookService.GetPageData(page, defaultPageSize);
+            var viewModel = model.ToMappedPagedList<AccountBook, MoneyRecordViewModel>();
+            ViewData.Model = viewModel;
             return View("MoneyRecordList");
         }
 

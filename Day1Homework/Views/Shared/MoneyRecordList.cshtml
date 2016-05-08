@@ -1,4 +1,5 @@
-﻿@using MvcPaging;
+﻿@using PagedList;
+@using PagedList.Mvc;
 
 @model IPagedList<MoneyRecordViewModel>
 @{
@@ -62,12 +63,7 @@
     </div>
 </div>
 
-@Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount).Options(o => o
-        .DisplayTemplate("BootstrapPagination")
-        .Action("Index")
-        .MaxNrOfPages(10)
-        .AlwaysAddFirstPageNumber()
-    )
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
 
 @helper GerColor(MoneyCategory value)
 {

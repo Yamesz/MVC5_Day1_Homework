@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AutoMapper;
+using PagedList;
+using System;
+using System.Collections.Generic;
 
 namespace Day1Homework.Utility
 {
@@ -13,6 +16,21 @@ namespace Day1Homework.Utility
             DateTime retVal = DateTime.MinValue;
             DateTime.TryParse(sourceString, out retVal);
             return retVal;
+        }
+
+        public static int ToPageIndex(this int? source)
+        {
+            return source.HasValue && source.Value > 0
+                    ? source.Value
+                    : 1;
+        }
+
+        public static IPagedList<TDestination> ToMappedPagedList<TSource, TDestination>(this IPagedList<TSource> list)
+        {
+            IEnumerable<TDestination> sourceList = Mapper.Map<IEnumerable<TSource>, IEnumerable<TDestination>>(list);
+            IPagedList<TDestination> pagedResult = new StaticPagedList<TDestination>(sourceList, list.GetMetaData());
+            return pagedResult;
+
         }
     }
 }

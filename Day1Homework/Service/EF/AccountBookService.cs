@@ -6,6 +6,8 @@ using System.Web;
 using Day1Homework.Models;
 using Day1Homework.Repositories;
 using System.Data.Entity;
+using Day1Homework.Utility;
+using PagedList;
 
 namespace Day1Homework.Service
 {
@@ -20,13 +22,16 @@ namespace Day1Homework.Service
             this._db = this._unitOfWork.Context;
         }
 
-        public IEnumerable<AccountBook> GetPageData(int pageIndex, int pageSize)
+        public IPagedList<AccountBook> GetPageData(int? page, int pageSize)
         {
             return _db.AccountBook
                     .OrderByDescending(x=>x.Dateee)
-                    .Skip((pageIndex) * pageSize)
-                    .Take(pageSize)
-                    .ToList();
+                    .ToPagedList(page.ToPageIndex(), pageSize);
+            //return _db.AccountBook
+            //        .OrderByDescending(x=>x.Dateee)
+            //        .Skip((pageIndex) * pageSize)
+            //        .Take(pageSize)
+            //        .ToList();
         }
 
         public AccountBook GetRecord(Guid id)
