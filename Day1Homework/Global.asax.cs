@@ -13,6 +13,12 @@ namespace Day1Homework
     {
         protected void Application_Start()
         {
+            // 清除所有 View Engine
+            ViewEngines.Engines.Clear();
+            // 重新註冊 RazorViewEngine，如果你使用的是 WebForm ViewEngine 則是加入 WebFormViewEngine
+            ViewEngines.Engines.Add(new RazorViewEngine());
+
+
             AutoMapperConfig.Configure();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

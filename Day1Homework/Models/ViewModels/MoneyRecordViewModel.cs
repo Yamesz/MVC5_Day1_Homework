@@ -17,6 +17,7 @@ namespace Day1Homework.Models.ViewModels
         public MoneyCategory category { get; set; }
 
         [Display(Name = "金額")]
+        [DataType(DataType.Currency)]
         [Required]
         //作業要求的正整數
         //自己加入 當金額是0時，請輸入備註的客製化驗證
@@ -27,6 +28,7 @@ namespace Day1Homework.Models.ViewModels
         [DataType(DataType.Date)]
         [Required]
         [NotGreaterThanToday]
+        [UIHint("DateTime")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime date { get; set; }
 

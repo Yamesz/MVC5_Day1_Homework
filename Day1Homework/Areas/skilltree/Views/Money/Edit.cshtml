@@ -32,6 +32,8 @@
             return true;
         });
         $.validator.unobtrusive.adapters.addBool('notgreaterthantoday');
+
+        $("[data-datetimepicker]").datetimepicker();
     </script>
 
     @Html.Partial("_sweetalert2")
