@@ -99,6 +99,7 @@
     <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -230,10 +231,12 @@
     <Compile Include="Areas\skilltree\Controllers\MoneyController.cs" />
     <Compile Include="Areas\skilltree\skilltreeAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FeedController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="CustomAttribute\CustomAuthorizeAttribute.cs" />
     <Compile Include="CustomAttribute\NotGreaterThanTodayAttribute.cs" />
+    <Compile Include="CustomResults\RssActionResult.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -347,6 +350,7 @@
     <Folder Include="Areas\skilltree\Models\" />
     <Folder Include="Areas\skilltree\Views\Shared\" />
     <Folder Include="Service\Dapper\" />
+    <Folder Include="Views\Feed\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
