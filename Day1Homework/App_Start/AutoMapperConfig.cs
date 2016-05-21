@@ -14,8 +14,6 @@ namespace Day1Homework.App_Start
     {
         public static void Configure()
         {
- 
-
             Mapper.Initialize(cfg => {
                 cfg.CreateMap<AccountBook, MoneyRecordViewModel>()
                 .ForMember(target => target.accountBookID, option => option.MapFrom(source => source.Id))
@@ -29,8 +27,8 @@ namespace Day1Homework.App_Start
                 .ForMember(target => target.Amounttt, option => option.MapFrom(source => source.money))
                 .ForMember(target => target.Dateee, option => option.MapFrom(source => source.date))
                 .ForMember(target => target.Remarkkk, option => option.MapFrom(source => source.description));
-                cfg.CreateMap<PagedList<AccountBook>, PagedList<MoneyRecordViewModel>>()
-                        .ConvertUsing<PagedListConverter>();
+                //cfg.CreateMap<PagedList<AccountBook>, PagedList<MoneyRecordViewModel>>()
+                //        .ConvertUsing<PagedListConverter>();
             });
 
             //Mapper.Initialize(x =>

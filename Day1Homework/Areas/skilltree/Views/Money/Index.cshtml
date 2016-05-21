@@ -7,9 +7,5 @@
 
 @section pagejs
 {
-
-    @if (ViewData["AlertViewModel"] != null)
-    {
-        @Html.Partial("_sweetalert2", ViewData["AlertViewModel"])
-    }
+    @Html.Partial("_sweetalert2")
 }

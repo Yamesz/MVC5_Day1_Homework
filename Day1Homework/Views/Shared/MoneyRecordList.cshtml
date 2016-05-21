@@ -23,15 +23,15 @@
                 <th>
                     @Html.DisplayNameFor(model => model.First().money)
                 </th>
-                @{
-                    if (isAdmin)
-                    {
-                        <th>
-                            <span class="fa fa-wrench"></span>
-                        </th>
-                    }
+
+                @if (isAdmin)
+                {
+                    <th>
+                        <span class="fa fa-wrench"></span>
+                    </th>
                 }
-                
+
+
             </tr>
             @foreach (var item in Model)
             {
@@ -46,17 +46,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.money)
                     </td>
-                    @{
-                        if (isAdmin)
-                        {
-                            <td>
-                                <a href="@Url.Action("Edit",new {id=item.accountBookID })">
-                                    <span class="fa fa-pencil-square"></span>
-                                </a>
-                            </td>
-                        }
-                    }
-                    
+                    @AdminCanEdit(isAdmin,item)
                 </tr>
             }
         </table>
@@ -67,13 +57,25 @@
 
 @helper GerColor(MoneyCategory value)
 {
-    switch (value)
-    {
-        case MoneyCategory.pay:
+switch (value)
+{
+    case MoneyCategory.pay:
             @:danger
             break;
         case MoneyCategory.income:
             @:info
             break;
+    }
+}
+
+@helper AdminCanEdit(bool isAdmin, MoneyRecordViewModel item)
+{
+    if (isAdmin)
+    {
+        <td>
+            <a href="@Url.Action("Edit",new {id=item.accountBookID })">
+                <span class="fa fa-pencil-square"></span>
+            </a>
+        </td>
     }
 }

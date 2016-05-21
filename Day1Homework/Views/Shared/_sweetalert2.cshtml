@@ -1,10 +1,17 @@
-﻿@model AlertViewModel
-@{ 
-    if(Model == null || string.IsNullOrWhiteSpace(Model.Title))
+﻿@{ 
+    if (ViewData["AlertViewModel"] == null)
+    {
+        return;
+    }
+
+    AlertViewModel Model = ViewData["AlertViewModel"] as AlertViewModel;
+
+    if (Model == null || string.IsNullOrWhiteSpace(Model.Title))
     {
         return;
     }
 }
+
 <script>
     swal(
       '@Model.Title',

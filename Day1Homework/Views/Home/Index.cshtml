@@ -10,9 +10,7 @@
     @using (Html.BeginForm("add", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
     {
         @Html.AntiForgeryToken()
-
-        @Html.Partial("~/Views/Shared/_MoneyForm.cshtml")
-
+        @Html.Partial("_MoneyForm")
     }
 </div>
 @Html.Action("MoneyRecordList")
@@ -31,9 +29,6 @@
         });
         $.validator.unobtrusive.adapters.addBool('notgreaterthantoday');
     </script>
+    @Html.Partial("_sweetalert2")
 
-    @if (ViewData["AlertViewModel"] != null)
-    {
-        @Html.Partial("_sweetalert2", ViewData["AlertViewModel"])
-    }
 }

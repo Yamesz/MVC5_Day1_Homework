@@ -41,9 +41,8 @@ namespace Day1Homework.CustomAttribute
             rule.ValidationType = "notgreaterthantoday";
 
             //欄位 日期不能大於今天 無效。
-            //rule.ErrorMessage = FormatErrorMessage(metadata.GetDisplayName() + "不能大於今天");
-
-            rule.ErrorMessage = metadata.GetDisplayName() + "不能大於今天";
+            rule.ErrorMessage = FormatErrorMessage(metadata.GetDisplayName() + "不能大於今天");
+            //rule.ErrorMessage = metadata.GetDisplayName() + "不能大於今天";
             yield return rule;
         }
     }

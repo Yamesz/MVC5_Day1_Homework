@@ -11,7 +11,7 @@
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(x=>x.accountBookID)
-    @Html.Partial("~/Views/Shared/_MoneyForm.cshtml")
+    @Html.Partial("_MoneyForm")
 }
 
 <div>
@@ -34,8 +34,6 @@
         $.validator.unobtrusive.adapters.addBool('notgreaterthantoday');
     </script>
 
-    @if (ViewData["AlertViewModel"] != null)
-    {
-        @Html.Partial("_sweetalert2", ViewData["AlertViewModel"])
-    }
+    @Html.Partial("_sweetalert2")
+  
 }

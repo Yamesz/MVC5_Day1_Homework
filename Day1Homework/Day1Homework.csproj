@@ -255,7 +255,6 @@
     <Compile Include="Service\Interface\IAccountBookService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utility\Extension.cs" />
-    <Compile Include="Utility\PagedListConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\SkillTreeHomework.mdf" />

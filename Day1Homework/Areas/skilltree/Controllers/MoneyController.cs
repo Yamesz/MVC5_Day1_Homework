@@ -16,8 +16,8 @@ namespace Day1Homework.Areas.skilltree.Controllers
     [AdminAuthorize]
     public class MoneyController : Controller
     {
-        public IAccountBookService accountBookService { get; set; }
-        public ILogService logService { get; set; }
+        private IAccountBookService accountBookService { get; set; }
+        private ILogService logService { get; set; }
         private int defaultPageSize;
 
         public MoneyController(
